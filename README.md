@@ -5,26 +5,26 @@ You will also see how to serialize and deserialize json objects
 
 
 #### UserController 
-   Define actions for creating user, updating user, retrieve user, retrieve all users and search users by there name and age
+   Defines action for creating user, updating user, retrieve user, retrieve all users and search users by there name and age
      
 ### User 
-   Domain class define user
+   Domain class for User
 ### User object 
       User object provides implicit format for user to serialize and deserialize User.
-     When play action receives request, It tries to convert request body json object to User (request.body.asJson.get.as[User]).
-      It requires reader of User type . which we tried to provide via PROVIDING implicit READERR for type User.
+      When play action receives request, It tries to convert request body json object to User (request.body.asJson.get.as[User]).
+      It requires reader of User type . which we have provided via implicit Reader of type User.
       Similerly for sending response we have json writer of type User 
          
   
 ### UserService 
-   Cache to store users
+   Cache for users.
 
-## Routes
+### Routes
 ####  Create new user 
      curl -i \
          -H "Content-Type: application/json" \
           -X POST -d '{"id" :"3","name": "Brij","age": 30}' http://localhost:9000/user/create
-#### update user           
+#### Update user           
           curl -i \
            -H "Content-Type: application/json" \
             -X PUT -d '{"id" :"3","name": "Jay","age": 25}' http://localhost:9000/user/create   
