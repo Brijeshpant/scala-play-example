@@ -1,28 +1,23 @@
 package controllers
 
 import javax.inject._
+
+import config.DbConfig
 import play.api._
 import play.api.mvc._
 
 /**
- * This controller creates an `Action` to handle HTTP requests to the
- * application's home page.
- */
+  * Example for reading configuration from application config
+  * including other configuration
+  */
 @Singleton
-class HomeController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class HomeController @Inject()(config: Configuration, cc: ControllerComponents) extends AbstractController(cc) {
 
-  /**
-   * Create an Action to render an HTML page.
-   *
-   * The configuration in the `routes` file means that this method
-   * will be called when the application receives a `GET` request with
-   * a path of `/`.
-   */
   def index() = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.index())
-  }
-
-  def postData() = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.index())
+    val logFile = config.get[String]("loggers.log-file")
+    val dbConfig = config.get[DbConfig]("db.config")
+    val dbName = dbConfig.name
+    val password = dbConfig.password
+    Ok(config.get[String]("app.name"))
   }
 }
